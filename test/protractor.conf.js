@@ -11,7 +11,7 @@ exports.config = {
     },
 
     //gulp watch must be configured to 3001
-    baseUrl: 'http://localhost:3001/',
+    baseUrl: 'http://localhost:3000/',
 
     //testing framework is jasmine
     framework: 'jasmine',

@@ -40,9 +40,9 @@ describe('index', function() {
     });
 
     it('should show the number of comments as', function() {
-        var total = (element.all(by.repeater("comment in dish.comments")));
+        var total = (element.all(by.repeater('comment in dish.comments')));
 
-            expect(total.count()).toEqual(4);
+            expect(total.count()).toEqual(5);
 
     });
 
