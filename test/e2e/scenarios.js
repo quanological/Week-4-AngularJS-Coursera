@@ -47,6 +47,7 @@ describe('index', function() {
        var total = (element.all(By.repeater('comment in dish.comments')));
         expect(total.count()).toEqual(6);
 
+
     });
 
 

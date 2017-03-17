@@ -26,6 +26,8 @@
             <ul class="list-unstyled">
                 <li ng-repeat="comment in dish.comments">
                 <blockquote>
+            <ul>
+                <blockquote ng-repeat="comment in dish.comments">
                     <p>{{comment.rating}} Stars</p>
                     <p>{{comment.comment}}</p>
                     <footer>{{comment.author}}, {{comment.date | date}}</footer>

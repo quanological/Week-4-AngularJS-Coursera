@@ -130,6 +130,7 @@ angular.module('confusionApp')
 
         $scope.comments = {rating: 5, comment: "", author: "", date: ""};
 
+
         $scope.submitComment = function () {
 
             $scope.mycomment.date = new Date().toISOString();
@@ -141,8 +142,10 @@ angular.module('confusionApp')
 
             //resets form
             $scope.commentForm.$setPristine();
+
     //MADE CHANGE DELETED THIS BECAUSE I THINK IT IS RESETTING THE AMOUNT OF COMMENTS TO 0?
             //$scope.mycomment = {rating: 5, comment: "", author: "", date: ""};
+
         };
     }])
 

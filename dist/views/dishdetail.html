@@ -23,14 +23,22 @@
             </div>
         </div>
         <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
+<<<<<<< HEAD
             <ul class="list-unstyled">
                 <li ng-repeat="comment in dish.comments">
                 <blockquote>
+=======
+            <ul>
+                <blockquote ng-repeat="comment in dish.comments">
+>>>>>>> 278a0ac69cd48fca29b312badc253466e6371781
                     <p>{{comment.rating}} Stars</p>
                     <p>{{comment.comment}}</p>
                     <footer>{{comment.author}}, {{comment.date | date}}</footer>
                 </blockquote>
+<<<<<<< HEAD
                 </li>
+=======
+>>>>>>> 278a0ac69cd48fca29b312badc253466e6371781
             </ul>
             <ul ng-show="!commentForm.$pristine && commentForm.$valid">
                 <blockquote>
