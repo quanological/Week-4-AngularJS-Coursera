@@ -3,8 +3,7 @@ var gulp = require('gulp')
     , jshint = require('gulp-jshint')
     , stylish = require('jshint-stylish')
     , uglify = require('gulp-uglify')
-    ,
-    //usemin = require('gulp-usemin',
+    , usemin = require('gulp-usemin'),
 
     imagemin = require('gulp-imagemin')
     , rename = require('gulp-rename')
@@ -27,16 +26,16 @@ gulp.task('clean', function () {
 });
 // Default task
 gulp.task('default', ['clean'], function () {
-    gulp.start('imagemin', 'copyfonts');
+    gulp.start('usemin', 'imagemin', 'copyfonts', 'copyviews');
 });
-// gulp.task('usemin',['jshint'], function () {
-//     return gulp.src('./app/**/*.html')
-//         .pipe(usemin({
-//             css:[minifycss(),rev()],
-//             js: [ngannotate(),uglify(),rev()]
-//         }))
-//         .pipe(gulp.dest('dist/'));
-// });
+gulp.task('usemin',['jshint'], function () {
+    return gulp.src('./app/*.html')
+        .pipe(usemin({
+            css:[minifycss(),rev()],
+            js: [ngannotate(),uglify(),rev()]
+        }))
+        .pipe(gulp.dest('dist/'));
+});
 // Images
 gulp.task('imagemin', function () {
     return del(['dist/images']), gulp.src('app/images/**/*').pipe(cache(imagemin({
@@ -51,27 +50,59 @@ gulp.task('copyfonts', ['clean'], function () {
     gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*').pipe(gulp.dest('./dist/fonts'));
     gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*').pipe(gulp.dest('./dist/fonts'));
 });
+
+//copyviews
+gulp.task('copyviews', ['clean'], function() {
+    //views html files
+    return gulp.src('./app/views/*.html')
+        .pipe(gulp.dest('dist/views/'));
+});
 // Watch
 gulp.task('watch', ['browser-sync'], function () {
     // Watch .js files
-    gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}');
+    gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
     // Watch image files
     gulp.watch('app/images/**/*', ['imagemin']);
 });
+
+// Browser Sync -0 guy's code from https://www.coursera.org/learn/angular-js/discussions/all/threads/rWCY3qGmEeWF6gpqp4BTmQ/replies/KhUJfqr1EeagRwptN6JMvA/comments/oOWgUv21EeaAEw6UuoNihg?page=2
 gulp.task('browser-sync', ['default'], function () {
     var files = [
-        'app/**/*.html'
-        , 'app/styles/**/*.css'
-        , 'app/images/**/*.png'
-        , 'app/scripts/**/*.js'
-        , 'dist/**/*'
+        'app/**/*.html',
+        'app/views/**/*.html',
+        'app/styles/**/*.css',
+        'app/images/**/*.png',
+        'app/scripts/**/*.js',
+        'dist/**/*'
+    ];
+
+    browserSync.init(files, {
+        server: {
+            baseDir: "dist",
+            index: "index.html"
+        },
+        reloadDelay: 1000
+    });
+
+
+
+/*
+My code
+gulp.task('browser-sync', ['default'], function () {
+    var files = [
+        'app/!**!/!*.html'
+        , 'app/styles/!**!/!*.css'
+        , 'app/images/!**!/!*.png'
+        , 'app/scripts/!**!/!*.js'
+        , 'dist/!**!/!*'
     ];
     browserSync.init(files, {
         server: {
             baseDir: "dist",
             index: "index.html"
-        }
-    });
+        },
+        reloadDelay:1000
+    });*/
     // Watch any files in dist/, reload on change
     gulp.watch(['dist/**']).on('change', browserSync.reload);
 });
