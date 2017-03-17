@@ -128,7 +128,7 @@ angular.module('confusionApp')
     }])
     .controller('DishCommentController', ['$scope', 'menuFactory', function ($scope, menuFactory) { //menuFac so that we can make use of the getDishes function to push the comments
 
-        $scope.mycomment = {rating: 5, comment: "", author: "", date: ""};
+        $scope.comments = {rating: 5, comment: "", author: "", date: ""};
 
         $scope.submitComment = function () {
 
@@ -141,8 +141,8 @@ angular.module('confusionApp')
 
             //resets form
             $scope.commentForm.$setPristine();
-
-            $scope.mycomment = {rating: 5, comment: "", author: "", date: ""};
+    //MADE CHANGE DELETED THIS BECAUSE I THINK IT IS RESETTING THE AMOUNT OF COMMENTS TO 0?
+            //$scope.mycomment = {rating: 5, comment: "", author: "", date: ""};
         };
     }])
 

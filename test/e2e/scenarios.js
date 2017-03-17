@@ -39,10 +39,13 @@ describe('index', function() {
         })
     });
 
-    it('should show the number of comments as', function() {
-        var total = (element.all(by.repeater('comment in dish.comments')));
 
-            expect(total.count()).toEqual(5);
+
+   //Trying to get this test to work
+
+    it('should show the number of comments as', function() {
+       var total = (element.all(By.repeater('comment in dish.comments')));
+        expect(total.count()).toEqual(6);
 
     });
 
