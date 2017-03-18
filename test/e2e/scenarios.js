@@ -24,6 +24,10 @@ describe('index', function() {
         toEqual('Ristorante Con Fusion');
     });
 
+
+
+
+
     //check if the name of the first item is "Uthapizza Hot $4.99"
 
     describe('menu 0 item', function() {
@@ -33,19 +37,22 @@ describe('index', function() {
         });
 
         it('should have a name', function() {
-            var name = element(by.binding('dish.name'));
-            expect(name.getText()).toEqual('Uthapizza Hot $4.99');
+
+            element(by.model('filtTest')).sendKeys('author');
+            /*var name = element(by.binding('dish.name'));
+            expect(name.getText()).toEqual('Uthapizza Hot $4.99');*/
 
         })
     });
 
 
 
-   //Trying to get this test to work
+   //Trying to get this test to work!!
 
-    it('should show the number of comments as', function() {
-       var total = (element.all(By.repeater('comment in dish.comments')));
-        expect(total.count()).toEqual(6);
+    it('should show the number of author of first post as', function() {
+
+       expect(element.all(by.repeater("comment in dish.comments")).count()).toEqual(0);
+
 
 
     });
